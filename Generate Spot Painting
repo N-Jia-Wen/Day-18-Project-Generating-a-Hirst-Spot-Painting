@@ -1,0 +1,56 @@
+# # We use the commented-out code to generate the RGB colours of a Hirst spot painting found in colour_list
+# import colorgram
+#
+# rgb_values = []
+# colours = colorgram.extract('spot painting.jpg', 30)
+#
+# for colour in colours:
+#     r = colour.rgb.r
+#     g = colour.rgb.g
+#     b = colour.rgb.b
+#     new_colour = (r, g, b)
+#     rgb_values.append(new_colour)
+#
+# print(rgb_values)
+
+import turtle
+import random
+
+timmy = turtle.Turtle()
+turtle.colormode(255)
+colour_list = [(203, 156, 106), (59, 106, 126), (157, 85, 48), (125, 80, 96), (124, 157, 170), (192, 141, 41),
+               (127, 173, 159), (221, 198, 138), (46, 32, 20), (16, 42, 53), (186, 133, 146), (188, 90, 110),
+               (64, 119, 110), (50, 163, 130), (206, 96, 77), (148, 24, 34), (232, 169, 164), (9, 25, 24),
+               (150, 30, 21), (84, 144, 162), (230, 169, 172), (74, 33, 41), (23, 79, 91), (167, 206, 193),
+               (103, 127, 156), (22, 93, 89)]
+
+
+def create_dot():
+    random_colour = random.choice(colour_list)
+    timmy.dot(20, random_colour)
+    timmy.forward(50)
+
+
+def square_dot_painting(length):
+    timmy.hideturtle()
+    timmy.teleport(-(length * 20), -(length * 20))
+    timmy.speed("fastest")
+    timmy.penup()
+    for dots_number in range(1, length ** 2 + 1):
+        if dots_number % length == 0:
+            if dots_number % (length * 2) == 0:
+                timmy.right(90)
+                create_dot()
+                timmy.right(90)
+            else:
+                timmy.left(90)
+                create_dot()
+                timmy.left(90)
+        else:
+            create_dot()
+
+
+screen = turtle.Screen()
+# screen.setup(2000, 1000) (if we want to make the window bigger)
+square_dot_painting(10)
+screen.exitonclick()
